@@ -52,17 +52,17 @@ $(document).ready(function(){
     //start the countdown with one second intervals 
 	function startCountdown(){
         clearInterval(countdown);
-        countdown = setInterval(decrement, 1000);
+        setInterval(countdown, 1000);
     }
 
-    function decrement() {
-        number--;
-        $("#show-number").html("<h2>" + number + "</h2>");
-            if (number === 0) {
-            stop();
-            alert("Time Up!");
-            }
-    }
+   // function decrement() {
+    //    number--;
+    //    $("#show-number").html("<h2>" + number + "</h2>");
+    //        if (number === 0) {
+    //        stop();
+    //        alert("Time Up!");
+    //        }
+    //}
   
     //run after the timer is up, tally answers
 	function timeUp(){
