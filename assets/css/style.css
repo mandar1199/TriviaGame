@@ -1,8 +1,22 @@
 body {
     background-image: url("../images/mountOlympus.png");
-    height: 600px;
+    height: 820px;
     margin: 0;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+}
+.jumbotron {
+    text-align: center;
+    height: 150px;
+    margin-bottom: 5px;
+}
+.display-4 {
+    margin-top: -70px;
+}
+#startButton {
+    margin-top: -10px;
+}
+#game-content {
+    text-align: center;
 }
