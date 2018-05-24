@@ -1,105 +1,63 @@
-// Page timer is set to 60 seconds
-//var limit = 60*1000;
-
-
-// Countdown also starts at 60 seconds (same at the limit of the page timer)
+//---Global Variables
+//page timer is set to 60 seconds
+//countdown starts at 60 seconds same as the page timer
 var count = 60;
 
-
-// Count of Right, Wrong, and unanswered Qustions
+//keeping track of right, wrong, and unanswered questions
 var correctCount = 0;
 var wrongCount = 0;
 var unansweredCount = 0;
 
-
-
-// ------------------------ Game Functions are below ------------------------
+//---Funtions
+//beginnning game function
 $(document).ready(function(){
 
-	// TimeOut page after 1 minute
-	//setTimeout(timeUp, limit); <--- worked around it with a hack (count = 0 manaul set)
-
-
-
-	// Intialize the game with hidden Divs
+    //start the game with hidden divs
 	$("#game-content").hide();
 	$("#end-content").hide();
 
-	
-
-	// Set Scroll position so it looks good
+	//set scroll
 	window.scrollTo(0, 500);
 
-
-
-
-	$("#startButton").on("click", function(){
-
-		// Hide the start Div from the user
-		$("#start-content").hide();
-
-
-		// Show the Game Div
+    //when start button is clicked
+    $("#startButton").on("click", function(){
+        //show the game
 		$("#game-content").show();
-
-		startCountdown();
+        startCountdown();
 		return;
+    });
 
-	});
-
-
-
-	// Counts down and displays the time to the user
+    //countdown and show time to the user
 	function countdown(){
-
-		// Decrement the counter, down from 60 seconds
 		count--;
-
-		// Display the count to the user in the DOM
-    	$('#timer_number').html(count + " Seconds");
-
-    	
-
-    	// ----------- Handle Cases for Time ar 0 Seconds -----------
-			// User finishes before time is up and clicks done
+        //displays the count in the DOM
+        $('#timer_number').html(count + " Seconds");
+        
+			//if user finishes before time is up and clicks done
 			$("#done_button").on("click", function(){
-
-			// Stop the countdown and run the timeUp function
-			//clearInterval(startCountdown);
+            //stop the countdown and run the timeUp function
 			count = 0; // <---- Needed a hack since I couldn't get the clearInterval function to work... It's been a long week :/
 			return;
+        });
 
-			});
-
-
-			// Finish the game after the timer reaches 0
+           //if they go over in time
 			if(count == -1){
-
-				// Collect the radio inputs
+                //collect the radio inputs
 				timeUp();
+                //hide the game div 
+				$("#game-content").hide();
+            }
+    }
 
-				// Hide the game Div from the user
-				$("#mid_game_container").hide();
-
-			}
-
-
-	}
-
-
-	// Show the countdown, increment is 1 second
+    //start countdown
 	function startCountdown(){
+        setInterval(countdown, 1000);
+    }
 
-		setInterval(countdown, 1000);
-
-	}
-
-
-	// Function to be run after the timer is up
+    //run after the timer is up, tally answers
 	function timeUp(){
 
-
-		// Checked values of Radio Buttons
+        //check values of radio buttons
 		var Q1 = $('input:radio[name="q1"]:checked').val();
 		var Q2 = $('input:radio[name="q2"]:checked').val();
 		var Q3 = $('input:radio[name="q3"]:checked').val();
@@ -107,9 +65,7 @@ $(document).ready(function(){
 		var Q5 = $('input:radio[name="q5"]:checked').val();
 		var Q6 = $('input:radio[name="q6"]:checked').val();
 
-
-
-		//correct answers to question
+        //correct answers to question
 		if(Q1 == undefined){
 			unansweredCount++;
 		}
@@ -119,7 +75,6 @@ $(document).ready(function(){
 		else{
 			wrongCount++;
 		}
-
 
 		if(Q2 == undefined){
 			unansweredCount++;
@@ -131,7 +86,6 @@ $(document).ready(function(){
 			wrongCount++;
 		}
 
-
 		if(Q3 == undefined){
 			unansweredCount++;
 		}
@@ -142,7 +96,6 @@ $(document).ready(function(){
 			wrongCount++;
 		}
 
-
 		if(Q4 == undefined){
 			unansweredCount++;
 		}
@@ -151,9 +104,8 @@ $(document).ready(function(){
 		}
 		else{
 			wrongCount++;
-		}
-
-
+        }
+        
 		if(Q5 == undefined){
 			unansweredCount++;
 		}
@@ -162,9 +114,8 @@ $(document).ready(function(){
 		}
 		else{
 			wrongCount++;
-		}
-
-
+        }
+        
 		if(Q6 == undefined){
 			unansweredCount++;
 		}
@@ -175,23 +126,15 @@ $(document).ready(function(){
 			wrongCount++;
 		}
 
-
-
-
-
-		// After answers are validated, display the score results
+        //after questions are answered, display the score results
 		$('#correct-answers').html(correctCount);
 		$('#wrong-answers').html(wrongCount);
 		$('#unanswered').html(unansweredCount);
 
-
-		// Show the completed Score Div
+        //show scores page
 		$("#end-content").show();
 
-
-		// Set Scroll position so it looks good
+        //set scroll 
 		window.scrollTo(0, 550);
-
-	}
-
+    }
 });

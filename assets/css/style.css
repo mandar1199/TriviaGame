@@ -1,6 +1,6 @@
 body {
     background-image: url("../images/mountOlympus.png");
-    height: 820px;
+    height: 620px;
     margin: 0;
     background-repeat: no-repeat;
     background-position: center;
@@ -18,5 +18,8 @@ body {
     margin-top: -10px;
 }
 #game-content {
+    text-align: center;
+}
+#end-content {
     text-align: center;
 }
