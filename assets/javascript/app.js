@@ -1,6 +1,6 @@
 //---Global Variables
-//page timer is set to 60 seconds
-//countdown starts at 60 seconds same as the page timer
+//timer is set to 60 seconds
+//countdown starts at 60 seconds, same as timer
 var count = 60;
 
 //keeping track of right, wrong, and unanswered questions
@@ -12,7 +12,7 @@ var unansweredCount = 0;
 //beginnning game function
 $(document).ready(function(){
 
-    //start the game with hidden divs
+    //start with hidden divs
 	$("#game-content").hide();
 	$("#end-content").hide();
 
@@ -22,21 +22,21 @@ $(document).ready(function(){
     //when start button is clicked
     $("#startButton").on("click", function(){
         //show the game
-		$("#game-content").show();
+        $("#game-content").show();
+        //start timer
         startCountdown();
 		return;
     });
 
-    //countdown and show time to the user
+    //countdown and show time left to the user
 	function countdown(){
 		count--;
-        //displays the count in the DOM
+        //show the count in the DOM
         $('#timer_number').html(count + " Seconds");
-        
-			//if user finishes before time is up and clicks done
+            //if user finishes before time is up and clicks done
 			$("#done_button").on("click", function(){
             //stop the countdown and run the timeUp function
-			count = 0; // <---- Needed a hack since I couldn't get the clearInterval function to work... It's been a long week :/
+			count = 0; 
 			return;
         });
 
@@ -49,11 +49,21 @@ $(document).ready(function(){
             }
     }
 
-    //start countdown
+    //start the countdown with one second intervals 
 	function startCountdown(){
-        setInterval(countdown, 1000);
+        clearInterval(countdown);
+        countdown = setInterval(decrement, 1000);
     }
 
+    function decrement() {
+        number--;
+        $("#show-number").html("<h2>" + number + "</h2>");
+            if (number === 0) {
+            stop();
+            alert("Time Up!");
+            }
+    }
+  
     //run after the timer is up, tally answers
 	function timeUp(){
 
